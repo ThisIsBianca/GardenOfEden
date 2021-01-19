@@ -1,21 +1,27 @@
 //the intro was not drawn anymore
 
-//Method drawArrow draws the nerves of the leaf; "arrow" contains the curves which represent the nerves of the leaf
+//Method drawArrow draws the body features of the shapes; "arrow" contains the body features of Eve, while "arrow2" contains the body features of Adam
 
 void drawArrow(float scale) {
   o.pushState();
-
-  o.setPosition((Ax+Bx+Cx)/3, (Ay+By+Cy)/3);
+ fill(0,0,255);
+  o.setPosition((Ax+Bx+Cx+Dx)/4, (Ay+By+Cy+Dy)/4 );
+  //o.setPosition((Ax+Bx+Cx)/3, (Ay+By+Cy)/3);
 
   o.setHeading(180+o.towards(Ax, Ay));
   if (o.isReflecting()) {
-    o.setStamp("arrow.svg");
+    if(adam == false){
+    o.setStamp("arrow.svg");}
+    else {o.setStamp("arrow2.svg");}
   }
   else {
-    o.setStamp("arrow.svg");
+     if(adam == false){
+    o.setStamp("arrow.svg");}
+    else {o.setStamp("arrow2.svg");}
+
   }
   
-  o.stamp(24*scale);
+  o.stamp(80*scale, 230*scale);
 
   o.popState();
 } 
@@ -27,13 +33,13 @@ void drawPoints(){
   textFont(font,16);
   textAlign(CENTER, CENTER);
   fill(255,0,55);
-  o.setPenColor(0);
+  o.setPenColor(0,0,0);
   
-  drawPoint("A", Ax, Ay, 15, 0);
-  drawPoint("B", Bx, By, 0, -20);  
-  drawPoint("C", Cx, Cy, 0, 15);  
+  drawPoint("A", Ax, Ay, 0, -20);
+  drawPoint("B", Bx, By, -15, 0);  
+  drawPoint("C", Cx, Cy, 15, 0);  
+  drawPoint("D", Dx, Dy, 0, 15);  
 
- 
 
   o.popState();
   popStyle();
@@ -44,11 +50,11 @@ void drawPoint(String text, float x, float y, float a, float b){
     text(text, x+a, y + b);
 }
 
-
 void highlightGroup(float scale){
-  o.shift(180+vHeading, vDistance);
-  o.setPenColor(0);
+  o.pushState();
+  o.setPenColor(0,0,0);
   groupPositions(scale);
+  o.popState();
 }
 
 void showGrid(){
